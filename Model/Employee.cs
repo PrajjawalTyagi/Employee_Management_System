@@ -11,6 +11,7 @@ namespace Employee_Management_system.Model
         [Required]
         public string? EmployeeEmail { get; set; } = null;
         public DateTime? CreatedDate { get; set; } = null;
-
+        //add New Column for salary 
+        public Double? Salary { get; set; } = 0.0;
     }
 }

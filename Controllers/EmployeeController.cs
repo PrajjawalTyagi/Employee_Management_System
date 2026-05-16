@@ -31,11 +31,21 @@ namespace Employee_Management_system.Controllers
         {
             if(employee == null)
                 return BadRequest("Employee data is null.");
+
+            //more validation update step 2
+            if(string.IsNullOrEmpty(employee.EmployeeName) || string.IsNullOrEmpty(employee.EmployeeEmail))
+                return BadRequest("Employee name and email are required.");
+               
+            //chech condition salry more than 1000;
+            if(employee.Salary.HasValue && employee.Salary.Value < 1000)
+                return BadRequest("Salary must be at least 1000.");
+
             var newEmployee = new Employee
             {
                 EmployeeName = employee.EmployeeName,
                 EmployeeEmail = employee.EmployeeEmail,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now,
+                Salary = employee.Salary
             };
             _context.Employees.Add(newEmployee);
             _context.SaveChanges();
